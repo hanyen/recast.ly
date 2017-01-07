@@ -1,4 +1,11 @@
 var VideoPlayer = (props) => {
+  if (!props.video) {
+    return (
+      <div className="video-player">
+        <div>Loading</div>        
+      </div>
+  );
+  } 
   var url = 'https://www.youtube.com/embed/' + props.video.id.videoId;
   return (
   <div className="video-player">

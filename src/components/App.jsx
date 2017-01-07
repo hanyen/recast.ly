@@ -14,7 +14,6 @@ class App extends React.Component {
   }
 
   updateVideos(list) {
-    console.log(list);
     this.setState({
       videoListState: list,
       currentVideoState: list[0]
@@ -28,20 +27,19 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.videoListState.length);
-    if (this.state.videoListState.length === 0) {
-      return (
-        <div>
-          <Nav />
-          <div className="col-md-7">
-            <div>Loading</div>
-          </div>
-          <div className="col-md-5">
-            <div>Loading</div>
-          </div>
-        </div>
-      );
-    }
+    // if (this.state.videoListState.length === 0) {
+    //   return (
+    //     <div>
+    //       <Nav />
+    //       <div className="col-md-7">
+    //         <div>Loading</div>
+    //       </div>
+    //       <div className="col-md-5">
+    //         <div>Loading</div>
+    //       </div>
+    //     </div>
+    //   );
+    // }
     return (
       <div>
         <Nav />
