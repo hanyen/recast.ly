@@ -2,8 +2,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      videoListState: window.fakeVideoData, 
-      currentVideoState: window.fakeVideoData[0]
+      videoListState: window.exampleVideoData, 
+      currentVideoState: window.exampleVideoData[0]
     };
     if (props.searchYouTube.length > 0) {
       this.setState({
@@ -39,7 +39,7 @@ class App extends React.Component {
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 window.App = App;
-ReactDOM.render(<App searchYouTube={window.fakeVideoData}/>, document.getElementById('app'));
+
 //clickHandler={this.clickedVideoEntry.bind(this)}
 // var App = () => (
 //   <div>
