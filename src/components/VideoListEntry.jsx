@@ -1,5 +1,5 @@
 var VideoListEntry = (props) => (
-  <div onClick={props.whenClicked} title={props.video.snippet.title} id={props.video.id.videoId} className="video-list-entry">
+  <div onClick={function() { props.whenClicked(props.video); }} className="video-list-entry">
     <div className="media-left media-middle">
       <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
     </div>
@@ -19,3 +19,5 @@ VideoListEntry.propTypes = {
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 window.VideoListEntry = VideoListEntry;
+
+//title={props.video.snippet.title} id={props.video.id.videoId}
