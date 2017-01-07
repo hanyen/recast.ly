@@ -5,7 +5,9 @@ class App extends React.Component {
     this.state = {
       videoListState: [], 
       currentVideoState: null
-    };    
+    };
+    this.newSearch = _.debounce(this.newSearch, 500);
+
   }
 
   componentDidMount() {
@@ -15,8 +17,8 @@ class App extends React.Component {
 
   updateVideos(list) {
     this.setState({
-      videoListState: list,
-      currentVideoState: list[0]
+      videoListState: list, //data.item
+      currentVideoState: list[0] //data.item[0]
     });
   }
 
@@ -26,23 +28,15 @@ class App extends React.Component {
     });
   }
 
+  newSearch() {
+    var userInput = $('.form-control').val();
+    this.props.searchYouTube({ key: window.YOUTUBE_API_KEY, query: userInput, max: 10 }, this.updateVideos.bind(this));
+  }
+
   render() {
-    // if (this.state.videoListState.length === 0) {
-    //   return (
-    //     <div>
-    //       <Nav />
-    //       <div className="col-md-7">
-    //         <div>Loading</div>
-    //       </div>
-    //       <div className="col-md-5">
-    //         <div>Loading</div>
-    //       </div>
-    //     </div>
-    //   );
-    // }
     return (
       <div>
-        <Nav />
+        <Nav newSearch={this.newSearch.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideoState}/>
         </div>
