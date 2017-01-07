@@ -14,6 +14,9 @@ var searchYouTube = (options, callback) => {
     url: 'https://www.googleapis.com/youtube/v3/search',
     success: function(data) {
       callback(data.items);
+    },
+    error: function(data) {
+      console.log('failed');
     }
   });
 };
