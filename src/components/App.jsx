@@ -5,12 +5,14 @@ class App extends React.Component {
       videoListState: window.exampleVideoData, 
       currentVideoState: window.exampleVideoData[0]
     };
-    if (props.searchYouTube.length > 0) {
-      this.setState({
-        videoListState: props.searchYouTube,
-        currentVideoState: props.searchYoutube[0]
-      });
-    }
+
+    this.setState({
+      videoListState: props.searchYouTube({ key: YOUTUBE_API_KEY, query: 'cats', max: 10 }, () => {})
+    });
+    this.setState({
+      currentVideoState: this.state.videoListState[0]
+    });
+        
   }
 
   clickedVideoEntry(video) {
