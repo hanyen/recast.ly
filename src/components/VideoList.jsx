@@ -1,7 +1,7 @@
 var VideoList = (props) => (
   <div className="video-list media">
     {props.videos.map(video =>
-      <VideoListEntry video={video}/>
+      <VideoListEntry whenClicked={props.whenClicked} video={video}/>
     )}
   </div>
 );
@@ -16,6 +16,7 @@ VideoList.propTypes = {
 // `var` declarations will only exist globally where explicitly defined.
 window.VideoList = VideoList;
 
+//ReactDOM.render(<VideoList videos={exampleVideoData}/>, document.getElementById('app'));
 
 
 /*

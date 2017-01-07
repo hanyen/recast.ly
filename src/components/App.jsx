@@ -2,49 +2,53 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      empty: false
+      videoListState: window.fakeVideoData, 
+      currentVideoState: window.fakeVideoData[0]
     };
-    if (props.searchYouTube.length === 0) {
-      this.state.empty = true;
+    if (props.searchYouTube.length > 0) {
+      this.setState({
+        videoListState: props.searchYouTube,
+        currentVideoState: props.searchYoutube[0]
+      });
     }
   }
 
+  clickedVideoEntry(event) {
+    console.log('hi');
+    var nowPlaying = {
+      snippet: {title: event.currentTarget.title,
+        description: 'description goes here'  
+      },
+      id: {videoId: event.currentTarget.id}
+    };
+    this.setState({
+      currentVideoState: nowPlaying
+    });
+  }
+
   render() {
-    if (this.state.empty) {
-      return (
-        <div>
-          <Nav />
-          <div className="col-md-7">
-            <VideoPlayer video={window.fakeVideoData[0]}/>
-          </div>
-          <div className="col-md-5">
-            <VideoList videos={window.fakeVideoData}/>
-          </div>
-        </div>
-      );
-    }
     return (
       <div>
         <Nav />
         <div className="col-md-7">
-          <VideoPlayer video={this.props.searchYouTube[0]}/>
+          <VideoPlayer video={this.state.currentVideoState}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={this.props.searchYouTube}/>
+          <VideoList whenClicked={this.clickedVideoEntry.bind(this)} videos={this.state.videoListState}/>
         </div>
       </div>
     );
   }
 }
 
-
+//onClick={this.clickedVideoEntry}
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 window.App = App;
 
-ReactDOM.render(<VideoList videos={exampleVideoData}/>, document.getElementById('app'));
-
+ReactDOM.render(<App searchYouTube={window.fakeVideoData}/>, document.getElementById('app'));
+//clickHandler={this.clickedVideoEntry.bind(this)}
 // var App = () => (
 //   <div>
 //     <Nav />
