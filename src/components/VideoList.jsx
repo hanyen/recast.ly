@@ -16,7 +16,6 @@ VideoList.propTypes = {
 // `var` declarations will only exist globally where explicitly defined.
 window.VideoList = VideoList;
 
-ReactDOM.render(<VideoList videos={exampleVideoData}/>, document.getElementById('app'));
 
 
 /*
