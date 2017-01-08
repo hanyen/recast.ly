@@ -4,12 +4,16 @@ class App extends React.Component {
 
     this.state = {
       videoListState: [], 
-      currentVideoState: null
+      currentVideoState: null,
+      //create autoplay state
+      autoPlay: 0
+
     };
     this.newSearch = _.debounce(this.newSearch, 500);
 
   }
-
+//when autoplay button is pressed
+//
   componentDidMount() {
     //var a = this.props.searchYouTube({ key: window.YOUTUBE_API_KEY, query: 'cats', max: 10 });
     this.props.searchYouTube({ key: window.YOUTUBE_API_KEY, query: 'cats', max: 10 }, this.updateVideos.bind(this));
@@ -33,12 +37,18 @@ class App extends React.Component {
     this.props.searchYouTube({ key: window.YOUTUBE_API_KEY, query: userInput, max: 10 }, this.updateVideos.bind(this));
   }
 
+  toggleAutoPlay() {
+    this.setState({
+      autoPlay: this.state.autoPlay === 1 ? 0 : 1
+    });
+  }
+
   render() {
     return (
       <div>
         <Nav newSearch={this.newSearch.bind(this)}/>
         <div className="col-md-7">
-          <VideoPlayer video={this.state.currentVideoState}/>
+          <VideoPlayer video={this.state.currentVideoState} autoPlay={this.state.autoPlay} toggleAutoPlay={this.toggleAutoPlay.bind(this)}/>
         </div>
         <div className="col-md-5">
           <VideoList whenClicked={this.clickedVideoEntry.bind(this)} videos={this.state.videoListState}/>

@@ -6,7 +6,7 @@ var VideoPlayer = (props) => {
       </div>
   );
   } 
-  var url = 'https://www.youtube.com/embed/' + props.video.id.videoId;
+  var url = 'https://www.youtube.com/embed/' + props.video.id.videoId + '?autoplay=' + props.autoPlay;
   return (
   <div className="video-player">
     <div className="embed-responsive embed-responsive-16by9">
@@ -14,6 +14,7 @@ var VideoPlayer = (props) => {
     </div>
     <div className="video-player-details">
       <h3>{props.video.snippet.title}</h3>
+      <div>Autoplay: <button onClick={props.toggleAutoPlay}>{props.autoPlay === 1 ? 'On' : 'Off'}</button></div>
       <div>{props.video.snippet.description}</div>
     </div>
   </div>
